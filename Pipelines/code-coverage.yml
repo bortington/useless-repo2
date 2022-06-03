@@ -35,4 +35,4 @@ jobs:
       - template: codacy-dotnet-framework-code-coverage.yml@templates
         parameters:
           TestAssemblyFilter: '*Test*.dll'
-          CodacyProjectPath: bortington/${{ Build.Repository.Name }}
+          CodacyProjectPath: bortington/$(Build.Repository.Name)
