@@ -3,6 +3,7 @@ using WpfApp1;
 
 namespace TestProject1
 {
+    [TestFixture]
     public class Tests
     {
         [SetUp]
