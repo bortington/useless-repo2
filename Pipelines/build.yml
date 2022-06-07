@@ -21,8 +21,8 @@ steps:
   - task: VSBuild@1
     inputs:
       solution: '**/*.sln'
-      platform: '$(buildPlatform)'
-      configuration: '$(buildConfiguration)'
+      platform: '${{parameters.buildPlatform}}'
+      configuration: '${{parameters.buildConfiguration}}'
 
   - checkout: git://Fredproj/FredShared
     path: shared-workflows
