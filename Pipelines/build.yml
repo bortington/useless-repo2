@@ -7,12 +7,6 @@ parameters:
     type: string
     default: 'Release'
 
-resources:
-  repositories:
-  - repository: templates
-    type: git # git for Azure repos, github for github
-    name: Fredproj/FredShared
-    
 steps:
   - task: NuGetToolInstaller@1
 
@@ -26,7 +20,11 @@ steps:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
 
-  - template: codacy-dotnet-framework-code-coverage.yml@templates
+  - checkout: git://Fredproj/FredShared
+    inputs:
+      path: shared-workflows
+
+  - template: shared-workflows/codacy-dotnet-framework-code-coverage.yml
     parameters:
       TestAssemblyFilter: '*Test*.dll'
       CodacyProjectPath: bortington/$(Build.Repository.Name)
