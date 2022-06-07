@@ -7,6 +7,10 @@ parameters:
     type: string
     default: 'Release'
 
+  - name: templatesRepo
+    type: string
+    required: true
+
 steps:
   - task: NuGetToolInstaller@1
 
@@ -23,7 +27,7 @@ steps:
   - checkout: git://Fredproj/FredShared
     path: shared-workflows
 
-  - template: ${{variables['System.DefaultWorkingDirectory']}}/shared-workflows/codacy-dotnet-framework-code-coverage.yml@self
+  - template: ${{variables['System.DefaultWorkingDirectory']}}/shared-workflows/codacy-dotnet-framework-code-coverage.yml@${{parameters.templatesRepo}}
     parameters:
       TestAssemblyFilter: '*Test*.dll'
       CodacyProjectPath: bortington/$(Build.Repository.Name)
