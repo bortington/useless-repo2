@@ -1,11 +1,11 @@
 parameters:
   - name: buildPlatform
     type: string
-    default: ''Any CPU'
+    default: 'Any CPU'
 
   - name: buildConfiguration
     type: string
-    default: ''Release'
+    default: 'Release'
 
 steps:
   - task: NuGetToolInstaller@1
