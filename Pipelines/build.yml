@@ -9,7 +9,6 @@ parameters:
 
   - name: templatesRepo
     type: string
-    required: true
 
 steps:
   - task: NuGetToolInstaller@1
