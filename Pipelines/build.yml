@@ -21,8 +21,7 @@ steps:
       configuration: '$(buildConfiguration)'
 
   - checkout: git://Fredproj/FredShared
-    inputs:
-      path: shared-workflows
+    path: shared-workflows
 
   - template: shared-workflows/codacy-dotnet-framework-code-coverage.yml
     parameters:
