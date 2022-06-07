@@ -26,7 +26,7 @@ steps:
   - checkout: git://Fredproj/FredShared
     path: shared-workflows
 
-  - template: ${{variables['System.DefaultWorkingDirectory']}}/shared-workflows/codacy-dotnet-framework-code-coverage.yml@${{parameters.templatesRepo}}
+  - template: codacy-dotnet-framework-code-coverage.yml@${{parameters.templatesRepo}}
     parameters:
       TestAssemblyFilter: '*Test*.dll'
       CodacyProjectPath: bortington/$(Build.Repository.Name)
