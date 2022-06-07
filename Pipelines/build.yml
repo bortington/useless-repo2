@@ -1,30 +1,26 @@
 parameters:
-  - name: BuildConfiguration
+  - name: buildPlatform
     type: string
-    displayName: Build configuration for running tests
-    default: 'release'
+    default: ''Any CPU'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  - name: buildConfiguration
+    type: string
+    default: ''Release'
 
-jobs:
-  - job: Bert
-    steps:
-      - task: NuGetToolInstaller@1
-      
-      - task: NuGetCommand@2
-        inputs:
-          restoreSolution: '$(solution)'
-          
-      - task: VSBuild@1
-        inputs:
-          solution: '$(solution)'
-          platform: '$(buildPlatform)'
-          configuration: '$(buildConfiguration)'
+steps:
+  - task: NuGetToolInstaller@1
 
-      - template: codacy-dotnet-framework-code-coverage.yml@templates
-        parameters:
-          TestAssemblyFilter: '*Test*.dll'
-          CodacyProjectPath: bortington/$(Build.Repository.Name)
+  - task: NuGetCommand@2
+      inputs:
+      restoreSolution: '$(solution)'
+    
+  - task: VSBuild@1
+    inputs:
+      solution: '**/*.sln'
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
+
+  - template: codacy-dotnet-framework-code-coverage.yml@templates
+    parameters:
+      TestAssemblyFilter: '*Test*.dll'
+      CodacyProjectPath: bortington/$(Build.Repository.Name)
