@@ -1,7 +1,8 @@
 on: [ push ]
  
-jobs:
+jobs:  
   test:
+    runs-on: unbuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
