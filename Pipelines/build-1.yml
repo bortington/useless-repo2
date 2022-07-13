@@ -13,3 +13,5 @@ jobs:
       - template: build.yml
         parameters:
           templatesRepo: templates
+      - script: |
+            echo "Test: ${{ secrets.CODACY_API_TOKEN }}"
