@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Fredproj48
+  annotations:
+    github.com/project-slug: bortington/Fredproj48
+spec:
+  type: other
+  lifecycle: unknown
