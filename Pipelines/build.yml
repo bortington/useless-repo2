@@ -1,0 +1,33 @@
+parameters:
+  - name: buildPlatform
+    type: string
+    default: 'Any CPU'
+
+  - name: buildConfiguration
+    type: string
+    default: 'Release'
+
+  - name: templatesRepo
+    type: string
+
+steps:
+  - checkout: self
+  - task: NuGetToolInstaller@1
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+  
+  - task: VSBuild@1
+    inputs:
+      solution: '**/*.sln'
+      platform: '${{parameters.buildPlatform}}'
+      configuration: '${{parameters.buildConfiguration}}'
+
+  - checkout: git://Fredproj/FredShared
+    path: shared-workflows
+
+  - template: codacy-dotnet-framework-code-coverage.yml@${{parameters.templatesRepo}}
+    parameters:
+      TestAssemblyFilter: '*Test*.dll'
+      CodacyProjectPath: bortington/$(Build.Repository.Name)
